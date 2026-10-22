@@ -1,64 +1,43 @@
 <?php
-
 namespace App\Http\Controllers;
-
+use App\Models\{Product, Category};
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Product::with('category');
+        if ($request->filled('category')) $query->where('category_id', $request->category);
+        if ($request->filled('search')) {
+            $s = $request->search;
+            $query->where(fn($q) => $q->where('name', 'like', "%{$s}%")->orWhere('sku', 'like', "%{$s}%"));
+        }
+        $products = $query->paginate(20);
+        $categories = Category::all();
+        return view('products.index', compact('products', 'categories'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    
+    public function create() { return view('products.create', ['categories' => Category::all()]); }
+    
+    public function store(ProductRequest $request)
     {
-        //
+        Product::create($request->validated());
+        return redirect()->route('products.index')->with('success', 'Product created.');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    
+    public function edit(Product $product) { return view('products.edit', compact('product')); }
+    
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $product->update($request->validated());
+        return redirect()->route('products.index')->with('success', 'Product updated.');
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    
+    public function destroy(Product $product)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Product deleted.');
     }
 }
