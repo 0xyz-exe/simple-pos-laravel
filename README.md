@@ -2,6 +2,22 @@
 
 Point of Sale system with product management, cart, and transaction tracking.
 
+Repository: https://github.com/0xyz-exe/simple-pos-laravel
+
+## Screenshots
+
+### Cashier POS Checkout Interface
+![POS checkout](docs/screenshots/01_pos_checkout.png)
+
+### Product Catalog & Stock Management
+![Product catalog](docs/screenshots/02_products.png)
+
+### Transaction History & Daily Sales
+![Transactions](docs/screenshots/03_transactions.png)
+
+### Authentication
+![Authentication](docs/screenshots/04_login.png)
+
 ## Features
 
 - User authentication
