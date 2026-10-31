@@ -43,7 +43,8 @@ class CartController extends Controller
         try {
             $subtotal = 0;
             foreach ($cart as $item) {
-                $product = Product::lockForUpdate()->find($item['product']->id);
+                $pId = data_get($item, 'product.id');
+                $product = Product::lockForUpdate()->find($pId);
                 if ($product->stock < $item['quantity']) {
                     DB::rollBack();
                     return back()->with('error', "Insufficient stock for {$product->name}");
@@ -64,7 +65,8 @@ class CartController extends Controller
             ]);
             
             foreach ($cart as $item) {
-                $product = Product::find($item['product']->id);
+                $pId = data_get($item, 'product.id');
+                $product = Product::find($pId);
                 $product->decrement('stock', $item['quantity']);
                 
                 TransactionItem::create([

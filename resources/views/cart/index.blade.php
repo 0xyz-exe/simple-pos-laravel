@@ -27,10 +27,15 @@
                 @else
                     @php $total = 0; @endphp
                     @foreach($cart as $id => $item)
-                        @php $subtotal = $item['product']->price * $item['quantity']; $total += $subtotal; @endphp
+                        @php
+                            $pName = data_get($item, 'product.name');
+                            $pPrice = (float) data_get($item, 'product.price', 0);
+                            $subtotal = $pPrice * $item['quantity'];
+                            $total += $subtotal;
+                        @endphp
                         <div class="flex justify-between items-center mb-2 pb-2 border-b">
-                            <div class="flex-1"><p class="font-semibold text-sm">{{ $item['product']->name }}</p>
-                                <p class="text-xs text-gray-600">{{ $item['quantity'] }} × Rp {{ number_format($item['product']->price, 0, ',', '.') }}</p>
+                            <div class="flex-1"><p class="font-semibold text-sm">{{ $pName }}</p>
+                                <p class="text-xs text-gray-600">{{ $item['quantity'] }} × Rp {{ number_format($pPrice, 0, ',', '.') }}</p>
                             </div>
                             <div class="text-right"><p class="font-bold">Rp {{ number_format($subtotal, 0, ',', '.') }}</p>
                                 <form method="POST" action="{{ route('cart.remove', $id) }}" class="inline">@csrf @method('DELETE')

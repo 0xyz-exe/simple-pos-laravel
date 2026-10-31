@@ -6,17 +6,12 @@ Repository: https://github.com/0xyz-exe/simple-pos-laravel
 
 ## Screenshots
 
-### Cashier POS Checkout Interface
-![POS checkout](docs/screenshots/01_pos_checkout.png)
-
-### Product Catalog & Stock Management
-![Product catalog](docs/screenshots/02_products.png)
-
-### Transaction History & Daily Sales
-![Transactions](docs/screenshots/03_transactions.png)
-
-### Authentication
-![Authentication](docs/screenshots/04_login.png)
+| Tampilan | Preview |
+|---|---|
+| **Terminal Kasir POS & Keranjang Belanja**<br>Antarmuka kasir penjualan langsung dengan katalog produk, input kuantitas, keranjang belanja dinamis, pajak 10%, dan tombol checkout | ![Terminal Kasir POS & Keranjang Belanja](docs/screenshots/01-pos-terminal-register.png) |
+| **Rincian Struk Transaksi Penjualan**<br>Detail struk resmi transaksi kasir dengan kode unik TRX, rincian produk yang dibeli, harga satuan, subtotal, dan total akhir | ![Rincian Struk Transaksi Penjualan](docs/screenshots/02-transaction-receipt-detail.png) |
+| **Log Riwayat Transaksi & Ringkasan Harian**<br>Buku rekapitulasi riwayat transaksi penjualan harian kasir lengkap dengan ringkasan omzet dan tautan inspeksi struk | ![Log Riwayat Transaksi & Ringkasan Harian](docs/screenshots/03-transaction-history-audit.png) |
+| **Manajemen Inventaris & Katalog Produk**<br>Panel pengelolaan produk toko untuk memantau kode SKU, kategori produk, harga jual dalam Rupiah, dan kuantitas stok barang | ![Manajemen Inventaris & Katalog Produk](docs/screenshots/04-product-inventory-catalog.png) |
 
 ## Features
 
